@@ -9,12 +9,14 @@ module.exports = {
 	theme: {
 		container: {
 			center: true,
-			padding: '1.5rem',
 			screens: {
 				'2xl': '1400px',
 			},
 		},
 		extend: {
+			spacing: {
+				18: '4.5rem',
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
