@@ -1,6 +1,7 @@
 import './globals.css'
 import { ReactNode } from 'react'
 import { SignedIn, UserButton } from '@clerk/nextjs'
+import { Analytics } from '@vercel/analytics/react'
 import { League_Spartan } from 'next/font/google'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 
 	return (
 		<AuthProvider>
+			<Analytics />
 			<html lang="en" className={theme}>
 				<body className={spartan.className}>
 					<div className="flex min-h-screen flex-col xl:flex-row">
