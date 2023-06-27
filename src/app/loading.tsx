@@ -1,9 +1,10 @@
 import { InvoiceCard } from '@/components/InvoiceCard'
 import { Skeleton } from '@/components/ui/skeleton'
+import PageSection from './PageSection'
 
 export default function Loading() {
 	return (
-		<div className="space-y-4">
+		<PageSection disabled>
 			{Array.from({ length: 5 }, (_, idx) => (
 				<InvoiceCard
 					key={idx}
@@ -25,6 +26,6 @@ export default function Loading() {
 					}
 				/>
 			))}
-		</div>
+		</PageSection>
 	)
 }
