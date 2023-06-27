@@ -8,7 +8,7 @@ import IconMoon from '@/assets/icon-moon.svg'
 import IconSun from '@/assets/icon-sun.svg'
 import Logo from '@/assets/logo.svg'
 import { themeKey } from '@/lib/constants'
-import { getTheme } from '@/lib/utils'
+import { getTheme } from '@/lib/server-utils'
 import AuthProvider from './AuthProvider'
 
 const spartan = League_Spartan({ subsets: ['latin'] })
@@ -32,7 +32,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		<AuthProvider>
 			<html lang="en" className={theme}>
 				<body className={spartan.className}>
-					<div className="flex max-h-screen flex-col overflow-hidden xl:flex-row">
+					<div className="flex h-screen flex-col overflow-hidden xl:flex-row">
 						<header className="flex h-18 shrink-0 justify-between overflow-hidden bg-[#1E2139] md:h-20 xl:h-auto xl:w-[103px] xl:flex-col xl:rounded-r-sm">
 							<section className="relative flex h-18 w-18 flex-col-reverse rounded-br-lg bg-primary md:h-20 md:w-20 xl:h-[103px] xl:w-[103px]">
 								<h1 className="sr-only">Invoice app</h1>

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import { ClerkProvider } from '@clerk/nextjs'
 import { dark } from '@clerk/themes'
-import { getTheme } from '@/lib/utils'
+import { getTheme } from '@/lib/server-utils'
 
 export default function AuthProvider({ children }: { children: ReactNode }) {
 	return (
