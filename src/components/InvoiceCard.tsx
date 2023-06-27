@@ -1,6 +1,7 @@
 'use client'
 
 import { type ReactNode } from 'react'
+import Link from 'next/link'
 import { Invoice } from '@/db/schema'
 import { InvoiceContext, useInvoice } from '@/hooks/useInvoice'
 import { getInvoiceId } from '@/lib/utils'
@@ -17,8 +18,10 @@ export function InvoiceCard({ header, content, invoice = null }: Props) {
 	return (
 		<InvoiceContext.Provider value={invoice}>
 			<Card className="border-none shadow-none">
-				<CardHeader className="flex flex-row items-end justify-between">{header}</CardHeader>
-				<CardContent className="flex items-center justify-between">{content}</CardContent>
+				<Link href={invoice ? `/invoice/${invoice.id}` : '/'}>
+					<CardHeader className="flex flex-row items-end justify-between">{header}</CardHeader>
+					<CardContent className="flex items-center justify-between">{content}</CardContent>
+				</Link>
 			</Card>
 		</InvoiceContext.Provider>
 	)
