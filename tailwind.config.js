@@ -14,16 +14,6 @@ module.exports = {
 				'2xl': '1400px',
 			},
 		},
-		colors: {
-			gray: {
-				DEFAULT: 'hsl(231 73% 93%)',
-				dark: 'hsl(231 20% 61%)',
-				accented: 'hsl(231 37% 63%)',
-			},
-			black: {
-				draft: 'hsl(231, 20%, 27%)',
-			},
-		},
 		extend: {
 			spacing: {
 				4.5: '1.125rem',
@@ -65,6 +55,15 @@ module.exports = {
 				},
 				warning: 'hsl(var(--warning))',
 				success: 'hsl(var(--success))',
+				gray: {
+					DEFAULT: 'hsl(231 73% 93%)',
+					dark: 'hsl(231 20% 61%)',
+					darker: 'hsl(231 20% 27%)',
+					accented: 'hsl(231 37% 63%)',
+				},
+				black: {
+					draft: 'hsl(231, 20%, 27%)',
+				},
 			},
 			borderRadius: {
 				button: '1.5rem',
