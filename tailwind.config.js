@@ -2,9 +2,10 @@
 module.exports = {
 	darkMode: ['class'],
 	content: [
-		'./src/pages/**/*.{ts,tsx}',
-		'./src/components/**/*.{ts,tsx}',
-		'./src/app/**/*.{ts,tsx}',
+		'./pages/**/*.{ts,tsx}',
+		'./components/**/*.{ts,tsx}',
+		'./app/**/*.{ts,tsx}',
+		'./src/**/*.{ts,tsx}',
 	],
 	theme: {
 		container: {
@@ -13,8 +14,25 @@ module.exports = {
 				'2xl': '1400px',
 			},
 		},
+		colors: {
+			gray: {
+				DEFAULT: 'hsl(231 73% 93%)',
+				dark: 'hsl(231 20% 61%)',
+				accented: 'hsl(231 37% 63%)',
+			},
+			success: {
+				DEFAULT: 'hsl(160, 67%, 52%)',
+			},
+			orange: {
+				DEFAULT: 'hsl(34, 100%, 50%)',
+			},
+			black: {
+				draft: 'hsl(231, 20%, 27%)',
+			},
+		},
 		extend: {
 			spacing: {
+				4.5: '1.125rem',
 				18: '4.5rem',
 			},
 			colors: {
@@ -53,6 +71,7 @@ module.exports = {
 				},
 			},
 			borderRadius: {
+				button: '1.5rem',
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)',
@@ -72,12 +91,12 @@ module.exports = {
 				'accordion-up': 'accordion-up 0.2s ease-out',
 			},
 			fontSize: {
-				h1: ['2rem', { fontWeight: 700, lineHeight: 36, letterSpacing: -1 }],
-				h2: ['1.25rem', { fontWeight: 700, lineHeight: 22, letterSpacing: -0.8 }],
-				h3: ['1rem', { fontWeight: 700, lineHeight: 24, letterSpacing: -0.8 }],
-				h4: ['0.75rem', { fontWeight: 700, lineHeight: 15, letterSpacing: -0.25 }],
-				body1: ['0.75rem', { fontWeight: 500, lineHeight: 15, letterSpacing: -0.25 }],
-				body2: ['0.6875rem', { fontWeight: 500, lineHeight: 18, letterSpacing: -0.23 }],
+				h1: ['2rem', { fontWeight: 700, lineHeight: '36px', letterSpacing: -1 }],
+				h2: ['1.25rem', { fontWeight: 700, lineHeight: '22px', letterSpacing: -0.8 }],
+				h3: ['1rem', { fontWeight: 700, lineHeight: '24px', letterSpacing: -0.8 }],
+				h4: ['0.75rem', { fontWeight: 700, lineHeight: '15px', letterSpacing: -0.25 }],
+				body1: ['0.75rem', { fontWeight: 500, lineHeight: '15px', letterSpacing: -0.25 }],
+				body2: ['0.6875rem', { fontWeight: 500, lineHeight: '18px', letterSpacing: -0.23 }],
 			},
 		},
 	},
