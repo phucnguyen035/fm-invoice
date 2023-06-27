@@ -1,20 +1,11 @@
 'use client'
 
-import { createContext, useContext, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { Invoice } from '@/db/schema'
+import { InvoiceContext, useInvoice } from '@/hooks/useInvoice'
 import { getInvoiceId } from '@/lib/utils'
 import { InvoiceStatus } from './InvoiceStatus'
 import { Card, CardContent, CardHeader } from './ui/card'
-
-const InvoiceCardProvider = createContext<Invoice | null>(null)
-function useInvoiceCard() {
-	const invoice = useContext(InvoiceCardProvider)
-	if (!invoice) {
-		throw new Error('useInvoiceCard must be used within a InvoiceCardProvider')
-	}
-
-	return invoice
-}
 
 type Props = {
 	header?: ReactNode
@@ -24,17 +15,17 @@ type Props = {
 
 export function InvoiceCard({ header, content, invoice = null }: Props) {
 	return (
-		<InvoiceCardProvider.Provider value={invoice}>
+		<InvoiceContext.Provider value={invoice}>
 			<Card className="border-none shadow-none">
 				<CardHeader className="flex flex-row items-end justify-between">{header}</CardHeader>
 				<CardContent className="flex items-center justify-between">{content}</CardContent>
 			</Card>
-		</InvoiceCardProvider.Provider>
+		</InvoiceContext.Provider>
 	)
 }
 
 export function InvoiceCardHeader() {
-	const { id, clientName } = useInvoiceCard()
+	const { id, clientName } = useInvoice()
 
 	return (
 		<>
@@ -49,7 +40,7 @@ export function InvoiceCardHeader() {
 
 export function InvoiceCardContent() {
 	const locale = 'en-GB'
-	const { dueDate, items, status } = useInvoiceCard()
+	const { dueDate, items, status } = useInvoice()
 	const dueAmount = items.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
 
 	const formattedDueDate = new Intl.DateTimeFormat(locale, {
