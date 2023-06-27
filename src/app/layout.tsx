@@ -32,8 +32,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 		<AuthProvider>
 			<html lang="en" className={theme}>
 				<body className={spartan.className}>
-					<div className="flex min-h-screen flex-col xl:flex-row">
-						<header className="flex h-18 justify-between overflow-hidden bg-[#1E2139] md:h-20 xl:h-auto xl:w-[103px] xl:flex-col xl:rounded-r-sm">
+					<div className="flex max-h-screen flex-col overflow-hidden xl:flex-row">
+						<header className="flex h-18 shrink-0 justify-between overflow-hidden bg-[#1E2139] md:h-20 xl:h-auto xl:w-[103px] xl:flex-col xl:rounded-r-sm">
 							<section className="relative flex h-18 w-18 flex-col-reverse rounded-br-lg bg-primary md:h-20 md:w-20 xl:h-[103px] xl:w-[103px]">
 								<h1 className="sr-only">Invoice app</h1>
 								<div className="h-1/2 rounded-br-lg rounded-tl-lg bg-secondary" />
@@ -63,9 +63,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 							</section>
 						</header>
 
-						<main className="container mx-auto mt-8 flex-grow px-6 md:mt-14 md:px-8 xl:mt-18 xl:max-w-[730px] xl:px-0">
-							{children}
-						</main>
+						<div className="flex-grow overflow-auto px-6 py-8 md:px-8 md:py-14 xl:px-0">
+							<main className="container mx-auto xl:max-w-[730px]">{children}</main>
+						</div>
 					</div>
 				</body>
 			</html>
