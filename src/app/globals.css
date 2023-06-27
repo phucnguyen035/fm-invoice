@@ -14,7 +14,7 @@
 		--popover-foreground: 222.2 47.4% 11.2%;
 
 		--card: 0 0% 100%;
-		--card-foreground: 222.2 47.4% 11.2%;
+		--card-foreground: 231 28% 7%;
 
 		--border: 252 100% 73%;
 		--input: 252 100% 73%;
@@ -33,7 +33,7 @@
 
 		--ring: 215 20.2% 65.1%;
 
-		--radius: 1.5rem;
+		--radius: 0.5rem;
 	}
 
 	.dark {
@@ -46,8 +46,8 @@
 		--popover: 224 71% 4%;
 		--popover-foreground: 215 20.2% 65.1%;
 
-		--card: 224 71% 4%;
-		--card-foreground: 213 31% 91%;
+		--card: 233 31% 17%;
+		--card-foreground: 0 0% 100%;
 
 		--border: 233 30% 21%;
 		--input: 233 30% 21%;
@@ -65,8 +65,6 @@
 		--destructive-foreground: 0 0% 100%;
 
 		--ring: 216 34% 17%;
-
-		--radius: 1.5rem;
 	}
 }
 
