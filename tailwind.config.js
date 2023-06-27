@@ -20,12 +20,6 @@ module.exports = {
 				dark: 'hsl(231 20% 61%)',
 				accented: 'hsl(231 37% 63%)',
 			},
-			success: {
-				DEFAULT: 'hsl(160, 67%, 52%)',
-			},
-			orange: {
-				DEFAULT: 'hsl(34, 100%, 50%)',
-			},
 			black: {
 				draft: 'hsl(231, 20%, 27%)',
 			},
@@ -69,6 +63,8 @@ module.exports = {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))',
 				},
+				warning: 'hsl(var(--warning))',
+				success: 'hsl(var(--success))',
 			},
 			borderRadius: {
 				button: '1.5rem',

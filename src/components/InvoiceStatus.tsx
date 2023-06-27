@@ -8,7 +8,7 @@ export function InvoiceStatus({ status }: Pick<Invoice, 'status'>) {
 			color = 'text-success'
 			break
 		case 'pending':
-			color = 'text-orange'
+			color = 'text-warning'
 			break
 		default:
 			break
@@ -20,7 +20,7 @@ export function InvoiceStatus({ status }: Pick<Invoice, 'status'>) {
 			bg = 'bg-success/5'
 			break
 		case 'pending':
-			bg = 'bg-orange/5'
+			bg = 'bg-warning/5'
 		default:
 			break
 	}
@@ -31,7 +31,7 @@ export function InvoiceStatus({ status }: Pick<Invoice, 'status'>) {
 			indicatorBg = 'bg-success'
 			break
 		case 'pending':
-			indicatorBg = 'bg-orange'
+			indicatorBg = 'bg-warning'
 			break
 		default:
 			break

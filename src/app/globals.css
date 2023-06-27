@@ -34,6 +34,9 @@
 		--ring: 215 20.2% 65.1%;
 
 		--radius: 0.5rem;
+
+		--success: 160 67% 52%;
+		--warning: 34 100% 50%;
 	}
 
 	.dark {
