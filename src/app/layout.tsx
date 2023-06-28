@@ -52,8 +52,8 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 										<span className="sr-only">Toggle theme</span>
 										<Image
 											priority
-											src={theme === 'dark' ? IconMoon : IconSun}
-											alt={theme === 'dark' ? 'Dark mode' : 'Light mode'}
+											src={theme === 'dark' ? IconSun : IconMoon}
+											alt="toggle theme"
 											className="h-auto w-5"
 										/>
 									</button>
