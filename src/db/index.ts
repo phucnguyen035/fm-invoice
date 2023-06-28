@@ -9,7 +9,7 @@ export type Database = {
 
 export function createDb(connectionString = process.env.PG_POOLED_URI) {
 	const pool = new Pool({
-		connectionString: process.env.PG_POOLED_URI,
+		connectionString,
 		ssl: {
 			rejectUnauthorized: process.env.NODE_ENV === 'production',
 		},
