@@ -2,11 +2,12 @@ require('dotenv').config({ path: './.env.local' })
 
 import { faker } from '@faker-js/faker'
 import { NewInvoice, invoicePaymentTermsEnum, invoiceStatusEnum, invoices } from './schema'
+import { createDb } from '.'
 
 const userId = 'user_2RV2FNucprUckhjaQmKTwDu6zen'
 
 async function seed() {
-	const db = await import('.').then((module) => module.db)
+	const db = createDb(process.env.PG_DIRECT_URI)
 
 	await db.transaction(async (tx) => {
 		await tx.delete(invoices)

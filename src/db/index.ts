@@ -1,4 +1,3 @@
-import { eq } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { Pool } from 'pg'
 import { InvoiceMissingError } from '@/lib/error'
@@ -8,17 +7,21 @@ export type Database = {
 	invoices: typeof invoices
 }
 
-const pool = new Pool({
-	connectionString: process.env.PG_DIRECT_URI,
-	ssl: {
-		rejectUnauthorized: process.env.NODE_ENV === 'production',
-	},
-})
+export function createDb(connectionString = process.env.PG_POOLED_URI) {
+	const pool = new Pool({
+		connectionString: process.env.PG_POOLED_URI,
+		ssl: {
+			rejectUnauthorized: process.env.NODE_ENV === 'production',
+		},
+	})
 
-export const db = drizzle<Database>(pool, {
-	logger: process.env.NODE_ENV !== 'production',
-	schema: { invoices },
-})
+	return drizzle<Database>(pool, {
+		logger: process.env.NODE_ENV !== 'production',
+		schema: { invoices },
+	})
+}
+
+export const db = createDb()
 
 export async function getInvoices(userId: string) {
 	return db.query.invoices.findMany({ where: ({ creator }, { eq }) => eq(creator, userId) })
