@@ -5,9 +5,10 @@ import { getInvoices } from '@/db'
 import Empty from '../assets/empty.svg'
 import PageSection from './PageSection'
 
-export default async function Home() {
+export default async function Home({ searchParams }: { searchParams: { status?: string } }) {
 	const { userId } = auth()
-	const invoices = await getInvoices(userId ?? '')
+	const statuses = [...new Set(searchParams.status?.split(','))].filter(Boolean)
+	const invoices = await getInvoices(userId ?? '', statuses)
 
 	return (
 		<PageSection invoiceAmount={invoices.length}>
