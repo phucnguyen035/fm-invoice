@@ -11,7 +11,7 @@ import { Card, CardContent, CardHeader } from './ui/card'
 type Props = {
 	header?: ReactNode
 	content?: ReactNode
-	invoice?: Invoice | null
+	invoice?: Partial<Invoice> | null
 }
 
 export function InvoiceCard({ header, content, invoice = null }: Props) {
@@ -34,7 +34,7 @@ export function InvoiceCardHeader() {
 		<>
 			<h2 className="text-body1">
 				<span className="text-gray-accented">#</span>
-				{getInvoiceId(id)}
+				{getInvoiceId(id ?? '')}
 			</h2>
 			<span className="text-body1 capitalize">{clientName}</span>
 		</>
@@ -43,8 +43,7 @@ export function InvoiceCardHeader() {
 
 export function InvoiceCardContent() {
 	const locale = 'en-GB'
-	const { dueDate, items, status } = useInvoice()
-	const dueAmount = items.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)
+	const { dueDate, status, totalPrice } = useInvoice()
 
 	const formattedDueDate = new Intl.DateTimeFormat(locale, {
 		year: 'numeric',
@@ -55,7 +54,7 @@ export function InvoiceCardContent() {
 	const formattedAmount = new Intl.NumberFormat(locale, {
 		currency: 'GBP',
 		style: 'currency',
-	}).format(dueAmount)
+	}).format(totalPrice ?? 0)
 
 	return (
 		<>
@@ -64,7 +63,7 @@ export function InvoiceCardContent() {
 				<p className="text-h3">{formattedAmount}</p>
 			</div>
 
-			<InvoiceStatus status={status} />
+			{status && <InvoiceStatus status={status} />}
 		</>
 	)
 }
