@@ -1,5 +1,5 @@
-import { drizzle } from 'drizzle-orm/node-postgres'
-import { Pool } from 'pg'
+import { Pool } from '@neondatabase/serverless'
+import { drizzle } from 'drizzle-orm/neon-serverless'
 import { InvoiceMissingError } from '@/lib/error'
 import { invoices } from './schema'
 
@@ -7,21 +7,12 @@ export type Database = {
 	invoices: typeof invoices
 }
 
-export function createDb(connectionString = process.env.PG_POOLED_URI) {
-	const pool = new Pool({
-		connectionString,
-		ssl: {
-			rejectUnauthorized: process.env.NODE_ENV === 'production',
-		},
-	})
+const pool = new Pool({ connectionString: process.env.PG_POOLED_URI })
 
-	return drizzle<Database>(pool, {
-		logger: process.env.NODE_ENV !== 'production',
-		schema: { invoices },
-	})
-}
-
-export const db = createDb()
+const db = drizzle<Database>(pool, {
+	logger: process.env.NODE_ENV !== 'production',
+	schema: { invoices },
+})
 
 export async function getInvoices(userId: string) {
 	return db.query.invoices.findMany({ where: ({ creator }, { eq }) => eq(creator, userId) })

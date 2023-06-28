@@ -1,13 +1,18 @@
 require('dotenv').config({ path: './.env.local' })
 
 import { faker } from '@faker-js/faker'
+import { drizzle } from 'drizzle-orm/node-postgres'
+import { Pool } from 'pg'
 import { NewInvoice, invoicePaymentTermsEnum, invoiceStatusEnum, invoices } from './schema'
-import { createDb } from '.'
 
 const userId = 'user_2RV2FNucprUckhjaQmKTwDu6zen'
 
 async function seed() {
-	const db = createDb(process.env.PG_DIRECT_URI)
+	const pool = new Pool({
+		connectionString: process.env.PG_DIRECT_URI,
+		ssl: { rejectUnauthorized: false },
+	})
+	const db = drizzle(pool, { logger: true })
 
 	await db.transaction(async (tx) => {
 		await tx.delete(invoices)
