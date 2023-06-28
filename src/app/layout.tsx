@@ -4,6 +4,7 @@ import { SignedIn, UserButton } from '@clerk/nextjs'
 import { League_Spartan } from 'next/font/google'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
+import Link from 'next/link'
 import IconMoon from '@/assets/icon-moon.svg'
 import IconSun from '@/assets/icon-sun.svg'
 import Logo from '@/assets/logo.svg'
@@ -34,15 +35,18 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 				<body className={spartan.className}>
 					<div className="flex h-screen flex-col overflow-hidden xl:flex-row">
 						<header className="flex h-18 shrink-0 justify-between overflow-hidden bg-[#1E2139] md:h-20 xl:h-auto xl:w-[103px] xl:flex-col xl:rounded-r-sm">
-							<section className="relative flex h-18 w-18 flex-col-reverse rounded-br-lg bg-primary md:h-20 md:w-20 xl:h-[103px] xl:w-[103px]">
-								<h1 className="sr-only">Invoice app</h1>
-								<div className="h-1/2 rounded-br-lg rounded-tl-lg bg-secondary" />
+							<Link
+								href="/"
+								className="group relative flex h-18 w-18 flex-col-reverse rounded-br-lg bg-primary transition-colors hover:bg-primary/90 md:h-20 md:w-20 xl:h-[103px] xl:w-[103px]"
+							>
+								<p className="sr-only">Invoice app</p>
+								<div className="h-1/2 rounded-br-lg rounded-tl-lg bg-secondary transition-colors group-hover:bg-secondary/80" />
 								<div className="absolute inset-0 grid place-items-center">
 									<Image priority src={Logo} alt="Logo" className="h-auto w-6 md:w-7 xl:w-10" />
 								</div>
-							</section>
+							</Link>
 
-							<section className="grid grid-cols-2 items-center divide-x divide-[#494E6E] xl:grid-cols-1 xl:divide-x-0 xl:divide-y">
+							<div className="grid grid-cols-2 items-center divide-x divide-[#494E6E] xl:grid-cols-1 xl:divide-x-0 xl:divide-y">
 								<form action={toggleTheme} className="flex justify-center md:py-6">
 									<button type="submit">
 										<span className="sr-only">Toggle theme</span>
@@ -60,7 +64,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 										<UserButton />
 									</SignedIn>
 								</div>
-							</section>
+							</div>
 						</header>
 
 						<div className="flex-grow overflow-auto px-6 md:px-8 xl:px-0">
