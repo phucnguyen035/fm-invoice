@@ -1,5 +1,5 @@
 import { Pool as PoolNeon } from '@neondatabase/serverless'
-import { eq, or, sql } from 'drizzle-orm'
+import { eq, notInArray, or, sql } from 'drizzle-orm'
 import { drizzle as drizzleNeon } from 'drizzle-orm/neon-serverless'
 import { drizzle as drizzleNode } from 'drizzle-orm/node-postgres'
 import { Pool as PoolNode } from 'pg'
@@ -68,4 +68,12 @@ export async function getInvoiceFromId(invoiceId: string) {
 	}
 
 	return invoice
+}
+
+export async function resetInvoices() {
+	const result = await db
+		.delete(invoices)
+		.where(notInArray(invoices.id, db.select({ id: invoices.id }).from(invoices).offset(10)))
+
+	return result.rowCount
 }
