@@ -30,11 +30,14 @@ export default function Filter({ disabled = false }: Props) {
 		>
 			<SelectTrigger className="w-auto justify-normal space-x-3 border-none md:space-x-4">
 				<SelectValue
+					aria-labelledby="filter"
 					className="text-h4"
 					placeholder={
 						<>
 							<span className="md:hidden">Filter</span>
-							<span className="hidden md:inline-block">Filter by status</span>
+							<span id="filter" className="hidden md:inline-block">
+								Filter by status
+							</span>
 						</>
 					}
 				/>
