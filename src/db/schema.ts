@@ -1,5 +1,5 @@
 import { InferModel } from 'drizzle-orm'
-import { index, jsonb, pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
+import { jsonb, pgEnum, pgTable, text, timestamp, uuid } from 'drizzle-orm/pg-core'
 import { createInsertSchema } from 'drizzle-zod'
 import z from 'zod'
 
@@ -21,28 +21,21 @@ export const Item = z.object({
 })
 export type Item = z.infer<typeof Item>
 
-export const invoices = pgTable(
-	'invoices',
-	{
-		id: uuid('id').primaryKey().defaultRandom(),
-		creator: text('invoicer').notNull(),
-		status: invoiceStatusEnum('status').default('draft').notNull(),
-		issueDate: timestamp('issue_date').notNull(),
-		description: text('description'),
-		dueDate: timestamp('due_date').notNull(),
-		createdAt: timestamp('created_at').defaultNow().notNull(),
-		updatedAt: timestamp('updated_at').defaultNow().notNull(),
-		items: jsonb('items').$type<Item[]>().notNull(),
-		addressFrom: jsonb('address_from').$type<Address>().notNull(),
-		addressTo: jsonb('adress_to').$type<Address>().notNull(),
-		clientName: text('client_name').notNull(),
-		clientEmail: text('client_email').notNull(),
-		paymentTerms: invoicePaymentTermsEnum('payment_terms').notNull(),
-	},
-	(table) => ({
-		creatorIndex: index('creator_idx').on(table.creator),
-	})
-)
+export const invoices = pgTable('invoices', {
+	id: uuid('id').primaryKey().defaultRandom(),
+	status: invoiceStatusEnum('status').default('draft').notNull(),
+	issueDate: timestamp('issue_date').notNull(),
+	description: text('description'),
+	dueDate: timestamp('due_date').notNull(),
+	createdAt: timestamp('created_at').defaultNow().notNull(),
+	updatedAt: timestamp('updated_at').defaultNow().notNull(),
+	items: jsonb('items').$type<Item[]>().notNull(),
+	addressFrom: jsonb('address_from').$type<Address>().notNull(),
+	addressTo: jsonb('adress_to').$type<Address>().notNull(),
+	clientName: text('client_name').notNull(),
+	clientEmail: text('client_email').notNull(),
+	paymentTerms: invoicePaymentTermsEnum('payment_terms').notNull(),
+})
 export type Invoice = InferModel<typeof invoices>
 
 const insertInvoiceSchema = createInsertSchema(invoices, {

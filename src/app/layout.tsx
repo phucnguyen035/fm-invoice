@@ -1,16 +1,15 @@
 import './globals.css'
 import { ReactNode } from 'react'
-import { SignedIn, UserButton } from '@clerk/nextjs'
 import { League_Spartan } from 'next/font/google'
 import { cookies } from 'next/headers'
 import Image from 'next/image'
 import Link from 'next/link'
 import IconMoon from '@/assets/icon-moon.svg'
 import IconSun from '@/assets/icon-sun.svg'
+import ImageAvatar from '@/assets/image-avatar.jpg'
 import Logo from '@/assets/logo.svg'
 import { themeKey } from '@/lib/constants'
 import { getTheme } from '@/lib/server-utils'
-import AuthProvider from './AuthProvider'
 
 const spartan = League_Spartan({ subsets: ['latin'] })
 
@@ -30,51 +29,52 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 	const theme = getTheme()
 
 	return (
-		<AuthProvider>
-			<html lang="en" className={theme}>
-				<body className={spartan.className}>
-					<div className="flex h-screen flex-col overflow-hidden xl:flex-row">
-						<header className="flex h-18 shrink-0 justify-between overflow-hidden bg-[#1E2139] md:h-20 xl:h-auto xl:w-[103px] xl:flex-col xl:rounded-r-sm">
-							<Link
-								href="/"
-								className="group relative flex h-18 w-18 flex-col-reverse rounded-br-lg bg-primary transition-colors hover:bg-primary/90 md:h-20 md:w-20 xl:h-[103px] xl:w-[103px]"
-							>
-								<p className="sr-only">Invoice app</p>
-								<div className="h-1/2 rounded-br-lg rounded-tl-lg bg-secondary transition-colors group-hover:bg-secondary/80" />
-								<div className="absolute inset-0 grid place-items-center">
-									<Image priority src={Logo} alt="Logo" className="h-auto w-6 md:w-7 xl:w-10" />
-								</div>
-							</Link>
-
-							<div className="grid grid-cols-2 items-center divide-x divide-[#494E6E] xl:grid-cols-1 xl:divide-x-0 xl:divide-y">
-								<form action={toggleTheme} className="flex justify-center md:py-6">
-									<button type="submit">
-										<span className="sr-only">Toggle theme</span>
-										<Image
-											priority
-											src={theme === 'dark' ? IconSun : IconMoon}
-											alt="toggle theme"
-											className="h-auto w-5"
-										/>
-									</button>
-								</form>
-
-								<div className="px-6 py-5 md:px-8 md:py-6">
-									<SignedIn>
-										<UserButton />
-									</SignedIn>
-								</div>
+		<html lang="en" className={theme}>
+			<body className={spartan.className}>
+				<div className="flex h-screen flex-col overflow-hidden xl:flex-row">
+					<header className="flex h-18 shrink-0 justify-between overflow-hidden bg-[#1E2139] md:h-20 xl:h-auto xl:w-[103px] xl:flex-col xl:rounded-r-sm">
+						<Link
+							href="/"
+							className="group relative flex h-18 w-18 flex-col-reverse rounded-br-lg bg-primary transition-colors hover:bg-primary/90 md:h-20 md:w-20 xl:h-[103px] xl:w-[103px]"
+						>
+							<p className="sr-only">Invoice app</p>
+							<div className="h-1/2 rounded-br-lg rounded-tl-lg bg-secondary transition-colors group-hover:bg-secondary/80" />
+							<div className="absolute inset-0 grid place-items-center">
+								<Image priority src={Logo} alt="Logo" className="h-auto w-6 md:w-7 xl:w-10" />
 							</div>
-						</header>
+						</Link>
 
-						<div className="flex-grow overflow-auto px-6 md:px-8 xl:px-0">
-							<main className="container mx-auto flex h-screen flex-col py-8 md:py-14 xl:max-w-[730px]">
-								{children}
-							</main>
+						<div className="grid grid-cols-2 items-center divide-x divide-[#494E6E] xl:grid-cols-1 xl:divide-x-0 xl:divide-y">
+							<form action={toggleTheme} className="flex justify-center md:py-6">
+								<button type="submit">
+									<span className="sr-only">Toggle theme</span>
+									<Image
+										priority
+										src={theme === 'dark' ? IconSun : IconMoon}
+										alt="toggle theme"
+										className="h-auto w-5"
+									/>
+								</button>
+							</form>
+
+							<div className="px-6 py-5 md:px-0 md:py-6">
+								<Image
+									placeholder="empty"
+									src={ImageAvatar}
+									alt="user profile"
+									className="mx-auto h-8 w-8 rounded-full lg:h-10 lg:w-10"
+								/>
+							</div>
 						</div>
+					</header>
+
+					<div className="flex-grow overflow-auto px-6 md:px-8 xl:px-0">
+						<main className="container mx-auto flex h-screen flex-col py-8 md:py-14 xl:max-w-[730px]">
+							{children}
+						</main>
 					</div>
-				</body>
-			</html>
-		</AuthProvider>
+				</div>
+			</body>
+		</html>
 	)
 }

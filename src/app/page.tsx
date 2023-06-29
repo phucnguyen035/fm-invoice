@@ -1,4 +1,3 @@
-import { auth } from '@clerk/nextjs'
 import Image from 'next/image'
 import { InvoiceCard, InvoiceCardContent, InvoiceCardHeader } from '@/components/InvoiceCard'
 import { getInvoices } from '@/db'
@@ -6,9 +5,8 @@ import Empty from '../assets/empty.svg'
 import PageSection from './PageSection'
 
 export default async function Home({ searchParams }: { searchParams: { status?: string } }) {
-	const { userId } = auth()
 	const statuses = [...new Set(searchParams.status?.split(','))].filter(Boolean)
-	const invoices = await getInvoices(userId ?? '', statuses)
+	const invoices = await getInvoices(statuses)
 
 	return (
 		<PageSection invoiceAmount={invoices.length}>

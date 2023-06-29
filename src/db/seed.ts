@@ -5,8 +5,6 @@ import { drizzle } from 'drizzle-orm/node-postgres'
 import { Pool } from 'pg'
 import { NewInvoice, invoicePaymentTermsEnum, invoiceStatusEnum, invoices } from './schema'
 
-const userId = 'user_2RV2FNucprUckhjaQmKTwDu6zen'
-
 async function seed() {
 	const pool = new Pool({
 		connectionString: process.env.PG_DIRECT_URI,
@@ -16,11 +14,11 @@ async function seed() {
 
 	await db.transaction(async (tx) => {
 		await tx.delete(invoices)
-		await tx.insert(invoices).values(createInvoices(userId))
+		await tx.insert(invoices).values(createInvoices())
 	})
 }
 
-function createInvoices(userId: string, length = 10) {
+function createInvoices(length = 10) {
 	return Array.from(
 		{ length },
 		() =>
@@ -37,7 +35,6 @@ function createInvoices(userId: string, length = 10) {
 					postCode: faker.location.zipCode(),
 					street: faker.location.streetAddress(),
 				},
-				creator: userId,
 				clientEmail: faker.internet.email(),
 				clientName: faker.person.fullName(),
 				dueDate: faker.date.future(),

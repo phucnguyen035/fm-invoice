@@ -1,5 +1,5 @@
 import { Pool as PoolNeon } from '@neondatabase/serverless'
-import { and, eq, or, sql } from 'drizzle-orm'
+import { eq, or, sql } from 'drizzle-orm'
 import { drizzle as drizzleNeon } from 'drizzle-orm/neon-serverless'
 import { drizzle as drizzleNode } from 'drizzle-orm/node-postgres'
 import { Pool as PoolNode } from 'pg'
@@ -22,7 +22,7 @@ const db =
 				{ logger: true, schema: { invoices } }
 		  )
 
-export async function getInvoices(userId: string, statuses: string[]) {
+export async function getInvoices(statuses: string[]) {
 	const sq = db.$with('sq').as(
 		db
 			.select({
@@ -30,7 +30,6 @@ export async function getInvoices(userId: string, statuses: string[]) {
 				status: invoices.status,
 				clientName: invoices.clientName,
 				dueDate: invoices.dueDate,
-				creator: invoices.creator,
 				item: sql<Item>`jsonb_array_elements(${invoices.items})`.as('item'),
 			})
 			.from(invoices)
@@ -51,22 +50,17 @@ export async function getInvoices(userId: string, statuses: string[]) {
 		.from(sq)
 		.groupBy(sq.id, sq.status, sq.clientName, sq.dueDate)
 		.where(
-			and(
-				eq(sq.creator, userId),
-				statuses.length > 0
-					? or(
-							...statuses.map((s) =>
-								eq(sq.status, sql`${s}::${sql.raw(invoiceStatusEnum.enumName)}`)
-							)
-					  )
-					: undefined
-			)
+			statuses.length > 0
+				? or(
+						...statuses.map((s) => eq(sq.status, sql`${s}::${sql.raw(invoiceStatusEnum.enumName)}`))
+				  )
+				: undefined
 		)
 }
 
-export async function getInvoiceFromId(invoiceId: string, userId: string) {
+export async function getInvoiceFromId(invoiceId: string) {
 	const invoice = await db.query.invoices.findFirst({
-		where: ({ id, creator }, { eq, and }) => and(eq(id, invoiceId), eq(creator, userId)),
+		where: ({ id }, { eq }) => eq(id, invoiceId),
 	})
 
 	if (!invoice) {
