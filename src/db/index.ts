@@ -77,3 +77,9 @@ export async function resetInvoices() {
 
 	return result.rowCount
 }
+
+export async function countInvoices() {
+	const [{ count }] = await db.select({ count: sql<number>`count(*)` }).from(invoices)
+
+	return count
+}
