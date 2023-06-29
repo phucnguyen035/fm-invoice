@@ -28,9 +28,11 @@ export default function Filter({ disabled = false }: Props) {
 				router.push(pathname + `?status=${statuses.join(',')}`)
 			}}
 		>
-			<SelectTrigger className="w-auto justify-normal space-x-3 border-none md:space-x-4">
+			<SelectTrigger
+				aria-labelledby="filter"
+				className="w-auto justify-normal space-x-3 border-none md:space-x-4"
+			>
 				<SelectValue
-					aria-labelledby="filter"
 					className="text-h4"
 					placeholder={
 						<>
