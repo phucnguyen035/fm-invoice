@@ -13,7 +13,7 @@ type Props = {
 export default function PageSection({ invoiceAmount = 0, disabled = false, children }: Props) {
 	return (
 		<>
-			<div className="mb-8 flex items-center justify-between">
+			<div className="mb-8 flex items-center justify-between pt-8">
 				<div>
 					<h1 className="text-h2 font-bold">Invoices</h1>
 					<p>{invoiceAmount} invoices</p>
@@ -28,7 +28,7 @@ export default function PageSection({ invoiceAmount = 0, disabled = false, child
 					</Button>
 				</div>
 			</div>
-			<div className="flex-grow space-y-4">{children}</div>
+			<div className="flex-grow space-y-4 pb-8">{children}</div>
 		</>
 	)
 }

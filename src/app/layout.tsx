@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 	return (
 		<html lang="en" className={theme}>
 			<body className={spartan.className}>
-				<div className="flex h-screen flex-col overflow-hidden xl:flex-row">
+				<div className="flex flex-col overflow-hidden xl:h-screen xl:flex-row">
 					<header className="flex h-18 shrink-0 justify-between overflow-hidden bg-[#1E2139] md:h-20 xl:h-auto xl:w-[103px] xl:flex-col xl:rounded-r-sm">
 						<Link
 							href="/"
@@ -62,14 +62,14 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 									placeholder="empty"
 									src={ImageAvatar}
 									alt="user profile"
-									className="mx-auto h-8 w-8 rounded-full lg:h-10 lg:w-10"
+									className="mx-auto h-8 w-8 rounded-full xl:h-10 xl:w-10"
 								/>
 							</div>
 						</div>
 					</header>
 
 					<div className="flex-grow overflow-auto px-6 md:px-12 xl:px-0">
-						<main className="container mx-auto flex h-screen flex-col py-8 md:py-14 xl:max-w-[730px]">
+						<main className="container mx-auto flex h-screen flex-col xl:max-w-[730px]">
 							{children}
 						</main>
 					</div>
