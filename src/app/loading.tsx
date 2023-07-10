@@ -1,30 +1,11 @@
 import { InvoiceCard } from '@/components/InvoiceCard'
-import { Skeleton } from '@/components/ui/skeleton'
 import PageSection from './PageSection'
 
 export default function Loading() {
 	return (
 		<PageSection disabled>
 			{Array.from({ length: 5 }, (_, idx) => (
-				<InvoiceCard
-					key={idx}
-					header={
-						<>
-							<Skeleton className="h-3 w-20" />
-							<Skeleton className="h-3 w-20" />
-						</>
-					}
-					content={
-						<>
-							<div className="space-y-2">
-								<Skeleton className="h-3 w-32" />
-								<Skeleton className="h-6 w-28" />
-							</div>
-
-							<Skeleton className="h-10 w-[140px]" />
-						</>
-					}
-				/>
+				<InvoiceCard key={idx} loading />
 			))}
 		</PageSection>
 	)

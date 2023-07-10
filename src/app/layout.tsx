@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 						</div>
 					</header>
 
-					<div className="flex-grow overflow-auto px-6 md:px-8 xl:px-0">
+					<div className="flex-grow overflow-auto px-6 md:px-12 xl:px-0">
 						<main className="container mx-auto flex h-screen flex-col py-8 md:py-14 xl:max-w-[730px]">
 							{children}
 						</main>
