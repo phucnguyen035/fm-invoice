@@ -1,50 +1,21 @@
 'use client'
 
-import { type ReactNode } from 'react'
 import Link from 'next/link'
-import { Invoice } from '@/db/schema'
-import { InvoiceContext, useInvoice } from '@/hooks/useInvoice'
+import { type Invoice } from '@/db/schema'
+import { locale } from '@/lib/constants'
 import { getInvoiceId } from '@/lib/utils'
 import { InvoiceStatus } from './InvoiceStatus'
 import { Card, CardContent, CardHeader } from './ui/card'
 
 type Props = {
-	header?: ReactNode
-	content?: ReactNode
-	invoice?: Partial<Invoice> | null
+	id: string
+	clientName: string
+	status: Invoice['status']
+	dueDate: Date
+	totalPrice: number
 }
 
-export function InvoiceCard({ header, content, invoice = null }: Props) {
-	return (
-		<InvoiceContext.Provider value={invoice}>
-			<Card className="border-none shadow-none">
-				<Link href={invoice ? `/invoice/${invoice.id}` : '/'}>
-					<CardHeader className="flex flex-row items-end justify-between">{header}</CardHeader>
-					<CardContent className="flex items-center justify-between">{content}</CardContent>
-				</Link>
-			</Card>
-		</InvoiceContext.Provider>
-	)
-}
-
-export function InvoiceCardHeader() {
-	const { id, clientName } = useInvoice()
-
-	return (
-		<>
-			<h2 className="text-body1">
-				<span className="text-gray-accented">#</span>
-				{getInvoiceId(id ?? '')}
-			</h2>
-			<span className="text-body1 capitalize">{clientName}</span>
-		</>
-	)
-}
-
-export function InvoiceCardContent() {
-	const locale = 'en-GB'
-	const { dueDate, status, totalPrice } = useInvoice()
-
+export function InvoiceCard({ id, clientName, status, dueDate, totalPrice }: Props) {
 	const formattedDueDate = new Intl.DateTimeFormat(locale, {
 		year: 'numeric',
 		month: 'short',
@@ -57,13 +28,24 @@ export function InvoiceCardContent() {
 	}).format(totalPrice ?? 0)
 
 	return (
-		<>
-			<div className="space-y-2">
-				<p className="text-body1 text-gray-accented dark:text-gray">Due {formattedDueDate}</p>
-				<p className="text-h3">{formattedAmount}</p>
-			</div>
+		<Card className="border-none shadow-none">
+			<Link href={`/invoice/${id}`} className="">
+				<CardHeader className="flex flex-row items-end justify-between">
+					<h2 className="text-body1">
+						<span className="text-gray-accented">#</span>
+						{getInvoiceId(id)}
+					</h2>
+					<span className="text-body1 capitalize">{clientName}</span>
+				</CardHeader>
 
-			{status && <InvoiceStatus status={status} />}
-		</>
+				<CardContent className="flex items-center justify-between">
+					<div className="space-y-2">
+						<p className="text-body1 text-gray-accented dark:text-gray">Due {formattedDueDate}</p>
+						<p className="text-h3">{formattedAmount}</p>
+					</div>
+					<InvoiceStatus status={status} />
+				</CardContent>
+			</Link>
+		</Card>
 	)
 }

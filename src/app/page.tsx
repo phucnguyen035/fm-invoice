@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { InvoiceCard, InvoiceCardContent, InvoiceCardHeader } from '@/components/InvoiceCard'
+import { InvoiceCard } from '@/components/InvoiceCard'
 import { getInvoices } from '@/db'
 import Empty from '../assets/empty.svg'
 import PageSection from './PageSection'
@@ -14,9 +14,11 @@ export default async function Home({ searchParams }: { searchParams: { status?: 
 				invoices.map((invoice) => (
 					<InvoiceCard
 						key={invoice.id}
-						invoice={invoice}
-						header={<InvoiceCardHeader />}
-						content={<InvoiceCardContent />}
+						totalPrice={invoice.totalPrice}
+						id={invoice.id}
+						status={invoice.status}
+						dueDate={invoice.dueDate}
+						clientName={invoice.clientName}
 					/>
 				))
 			) : (
