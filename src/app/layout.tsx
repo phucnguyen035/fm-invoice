@@ -57,7 +57,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
 								</button>
 							</form>
 
-							<div className="px-6 py-5 md:px-0 md:py-6">
+							<div className="px-6 py-5 md:px-8 md:py-6 xl:px-0">
 								<Image
 									placeholder="empty"
 									src={ImageAvatar}
