@@ -4,7 +4,7 @@ import { ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import { type Invoice } from '@/db/schema'
 import { locale } from '@/lib/constants'
-import { getInvoiceId } from '@/lib/utils'
+import { getShortenedInvoiceId } from '@/lib/utils'
 import { InvoiceStatus } from './InvoiceStatus'
 import { Card, CardContent, CardHeader } from './ui/card'
 import { Skeleton } from './ui/skeleton'
@@ -46,7 +46,7 @@ export function InvoiceCard(props: Props) {
 					<CardHeader className="flex flex-row items-end justify-between">
 						<h2 className="text-body1 text-popover-foreground">
 							<span className="text-gray-accented">#</span>
-							{getInvoiceId(id)}
+							{getShortenedInvoiceId(id)}
 						</h2>
 						<span className="text-body1 capitalize">{clientName}</span>
 					</CardHeader>
@@ -65,7 +65,7 @@ export function InvoiceCard(props: Props) {
 					<CardContent className="grid grid-cols-5 items-center px-6 py-4">
 						<span className="text-h4 text-popover-foreground">
 							<span className="text-gray-accented">#</span>
-							{getInvoiceId(id)}
+							{getShortenedInvoiceId(id)}
 						</span>
 						<span className="text-body1 font-light">{formattedDueDate}</span>
 						<span className="text-body1">{clientName}</span>

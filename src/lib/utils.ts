@@ -15,7 +15,7 @@ export function cn(...inputs: ClassValue[]) {
 /**
  * Get the first 6 characters of the last part of a UUUID v4
  */
-export function getInvoiceId(id: string) {
+export function getShortenedInvoiceId(id: string) {
 	if (!z.string().uuid().safeParse(id).success) {
 		throw new Error('Invoice ID must be a UUID!')
 	}
