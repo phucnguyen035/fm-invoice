@@ -72,7 +72,7 @@ export function InvoiceCard(props: Props) {
 						<span className="text-h3 text-popover-foreground">{formattedAmount}</span>
 						<div className="flex items-center space-x-5">
 							<InvoiceStatus status={status} />
-							<ChevronRight className="h-2 stroke-primary" />
+							<ChevronRight className="h-4 stroke-primary" />
 						</div>
 					</CardContent>
 				</div>
