@@ -15,7 +15,7 @@ export default function PageSection({ invoiceAmount = 0, disabled = false, child
 		<>
 			<div className="my-8 flex items-center justify-between md:my-14 lg:my-18">
 				<div>
-					<h1 className="text-h2 font-bold md:text-h1">Invoices</h1>
+					<h1 className="text-h2 font-bold text-popover-foreground md:text-h1">Invoices</h1>
 					<p>{invoiceAmount} invoices</p>
 				</div>
 
