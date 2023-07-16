@@ -1,3 +1,5 @@
+'use server'
+
 import { Pool as PoolNeon } from '@neondatabase/serverless'
 import { eq, notInArray, or, sql } from 'drizzle-orm'
 import { drizzle as drizzleNeon } from 'drizzle-orm/neon-serverless'
@@ -82,4 +84,12 @@ export async function countInvoices() {
 	const [{ count }] = await db.select({ count: sql<number>`count(*)` }).from(invoices)
 
 	return count
+}
+
+export async function deleteInvoice(id: string) {
+	// TODO: Implement
+}
+
+export async function markInvoiceAsPaid(id: string) {
+	// TODO: Implement
 }
