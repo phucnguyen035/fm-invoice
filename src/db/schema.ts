@@ -21,7 +21,7 @@ export const Item = z.object({
 })
 export type Item = z.infer<typeof Item>
 
-export const invoices = pgTable('invoices', {
+export const invoicesTable = pgTable('invoices', {
 	id: uuid('id').primaryKey().defaultRandom(),
 	status: invoiceStatusEnum('status').default('draft').notNull(),
 	issueDate: timestamp('issue_date').notNull(),
@@ -36,9 +36,9 @@ export const invoices = pgTable('invoices', {
 	clientEmail: text('client_email').notNull(),
 	paymentTerms: invoicePaymentTermsEnum('payment_terms').notNull(),
 })
-export type Invoice = InferModel<typeof invoices>
+export type Invoice = InferModel<typeof invoicesTable>
 
-const insertInvoiceSchema = createInsertSchema(invoices, {
+const insertInvoiceSchema = createInsertSchema(invoicesTable, {
 	addressFrom: Address,
 	addressTo: Address,
 	items: Item.array(),

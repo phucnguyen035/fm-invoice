@@ -3,7 +3,7 @@ require('dotenv').config({ path: './.env.local' })
 import { faker } from '@faker-js/faker'
 import { drizzle } from 'drizzle-orm/node-postgres'
 import { Pool } from 'pg'
-import { NewInvoice, invoicePaymentTermsEnum, invoiceStatusEnum, invoices } from './schema'
+import { NewInvoice, invoicePaymentTermsEnum, invoiceStatusEnum, invoicesTable } from './schema'
 
 async function seed() {
 	const pool = new Pool({
@@ -13,8 +13,8 @@ async function seed() {
 	const db = drizzle(pool, { logger: true })
 
 	await db.transaction(async (tx) => {
-		await tx.delete(invoices)
-		await tx.insert(invoices).values(createInvoices())
+		await tx.delete(invoicesTable)
+		await tx.insert(invoicesTable).values(createInvoices())
 	})
 }
 
