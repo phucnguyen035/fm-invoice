@@ -39,45 +39,49 @@ export function InvoiceCard(props: Props) {
 	}).format(totalPrice ?? 0)
 
 	return (
-		<Card className="border-none shadow-none transition-[filter] hover:brightness-95 dark:hover:brightness-90">
-			<Link href={`/invoice/${id}`} className="">
-				{/* Mobile */}
-				<div className="md:hidden">
-					<CardHeader className="flex flex-row items-end justify-between">
-						<h2 className="text-body1 text-popover-foreground">
-							<span className="text-gray-accented">#</span>
-							{getShortenedInvoiceId(id)}
-						</h2>
-						<span className="text-body1 capitalize">{clientName}</span>
-					</CardHeader>
+		<article>
+			<Card className="border-none shadow-none transition-[filter] hover:brightness-95 dark:hover:brightness-90">
+				<Link href={`/invoice/${id}`} className="">
+					{/* Mobile */}
+					<div className="md:hidden">
+						<CardHeader className="flex flex-row items-end justify-between">
+							<h2 className="text-body1 text-popover-foreground">
+								<span className="text-gray-accented">#</span>
+								{getShortenedInvoiceId(id)}
+							</h2>
+							<span className="text-body1 capitalize">{clientName}</span>
+						</CardHeader>
 
-					<CardContent className="flex items-center justify-between">
-						<div className="space-y-2">
-							<p className="text-body1 text-gray-accented dark:text-gray">Due {formattedDueDate}</p>
-							<p className="text-h3 text-popover-foreground">{formattedAmount}</p>
-						</div>
-						<InvoiceStatus status={status} />
-					</CardContent>
-				</div>
-
-				{/* Desktop */}
-				<div className="hidden md:block">
-					<CardContent className="grid grid-cols-5 items-center px-6 py-4">
-						<span className="text-h4 text-popover-foreground">
-							<span className="text-gray-accented">#</span>
-							{getShortenedInvoiceId(id)}
-						</span>
-						<span className="text-body1 font-light">{formattedDueDate}</span>
-						<span className="text-body1">{clientName}</span>
-						<span className="text-h3 text-popover-foreground">{formattedAmount}</span>
-						<div className="flex items-center space-x-5">
+						<CardContent className="flex items-center justify-between">
+							<div className="space-y-2">
+								<p className="text-body1 text-gray-accented dark:text-gray">
+									Due {formattedDueDate}
+								</p>
+								<p className="text-h3 text-popover-foreground">{formattedAmount}</p>
+							</div>
 							<InvoiceStatus status={status} />
-							<ChevronRight className="h-4 stroke-primary" />
-						</div>
-					</CardContent>
-				</div>
-			</Link>
-		</Card>
+						</CardContent>
+					</div>
+
+					{/* Desktop */}
+					<div className="hidden md:block">
+						<CardContent className="grid grid-cols-5 items-center px-6 py-4">
+							<span className="text-h4 text-popover-foreground">
+								<span className="text-gray-accented">#</span>
+								{getShortenedInvoiceId(id)}
+							</span>
+							<span className="text-body1 font-light">{formattedDueDate}</span>
+							<span className="text-body1">{clientName}</span>
+							<span className="text-h3 text-popover-foreground">{formattedAmount}</span>
+							<div className="flex items-center space-x-5">
+								<InvoiceStatus status={status} />
+								<ChevronRight className="h-4 stroke-primary" />
+							</div>
+						</CardContent>
+					</div>
+				</Link>
+			</Card>
+		</article>
 	)
 }
 
