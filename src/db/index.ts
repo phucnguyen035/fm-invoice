@@ -1,10 +1,8 @@
 'use server'
 
-import { Pool as PoolNeon } from '@neondatabase/serverless'
+import { Pool } from '@neondatabase/serverless'
 import { eq, notInArray, or, sql } from 'drizzle-orm'
-import { drizzle as drizzleNeon } from 'drizzle-orm/neon-serverless'
-import { drizzle as drizzleNode } from 'drizzle-orm/node-postgres'
-import { Pool as PoolNode } from 'pg'
+import { drizzle } from 'drizzle-orm/neon-serverless'
 import { InvoiceMissingError } from '@/lib/error'
 import { Item, invoiceStatusEnum, invoicesTable } from './schema'
 
@@ -12,17 +10,10 @@ export type Database = {
 	invoices: typeof invoicesTable
 }
 
-const db =
-	process.env.NODE_ENV === 'production'
-		? drizzleNeon<Database>(new PoolNeon({ connectionString: process.env.PG_POOLED_URI }), {
-				schema: { invoices: invoicesTable },
-		  })
-		: drizzleNode<Database>(
-				new PoolNode({
-					connectionString: process.env.PG_POOLED_URI,
-				}),
-				{ logger: true, schema: { invoices: invoicesTable } }
-		  )
+const db = drizzle<Database>(new Pool({ connectionString: process.env.PG_POOLED_URI }), {
+	schema: { invoices: invoicesTable },
+	logger: process.env.NODE_ENV === 'production',
+})
 
 export async function getInvoices(statuses: string[]) {
 	const sq = db.$with('sq').as(
@@ -55,7 +46,7 @@ export async function getInvoices(statuses: string[]) {
 			statuses.length > 0
 				? or(
 						...statuses.map((s) => eq(sq.status, sql`${s}::${sql.raw(invoiceStatusEnum.enumName)}`))
-				  )
+					)
 				: undefined
 		)
 }
