@@ -3,8 +3,10 @@ import { extendTailwindMerge } from 'tailwind-merge'
 import { z } from 'zod'
 
 const customTwMerge = extendTailwindMerge({
-	classGroups: {
-		'font-size': [{ text: ['h1', 'h2', 'h3', 'h4', 'body1', 'body2'] }],
+	extend: {
+		classGroups: {
+			'font-size': [{ text: ['h1', 'h2', 'h3', 'h4', 'body1', 'body2'] }],
+		},
 	},
 })
 
@@ -13,7 +15,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Get the first 6 characters of the last part of a UUUID v4
+ * Get the first 6 characters of the last part of a UUID v4
  */
 export function getShortenedInvoiceId(id: string) {
 	if (!z.string().uuid().safeParse(id).success) {
