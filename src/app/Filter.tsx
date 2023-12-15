@@ -2,6 +2,7 @@
 
 import { useId, useState } from 'react'
 import { CheckedState } from '@radix-ui/react-checkbox'
+import { type Route } from 'next'
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Select, SelectContent, SelectTrigger, SelectValue } from '@/components/ui/select'
@@ -25,7 +26,7 @@ export default function Filter({ disabled = false }: Props) {
 					return
 				}
 
-				router.push(pathname + `?status=${statuses.join(',')}`)
+				router.push((pathname + `?status=${statuses.join(',')}`) as Route)
 			}}
 		>
 			<SelectTrigger
