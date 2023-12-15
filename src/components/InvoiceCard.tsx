@@ -41,7 +41,7 @@ export function InvoiceCard(props: Props) {
 	return (
 		<article>
 			<Card className="border-none shadow-none transition-[filter] hover:brightness-95 dark:hover:brightness-90">
-				<Link href={`/invoice/${id}`} className="">
+				<Link href={`/invoices/${id}`}>
 					{/* Mobile */}
 					<div className="md:hidden">
 						<CardHeader className="flex flex-row items-end justify-between">
