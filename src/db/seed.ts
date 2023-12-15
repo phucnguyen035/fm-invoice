@@ -39,7 +39,7 @@ function createInvoices(length = 10) {
 				clientName: faker.person.fullName(),
 				dueDate: faker.date.future(),
 				issueDate: faker.date.past(),
-				description: faker.commerce.productDescription(),
+				description: faker.commerce.productName(),
 				paymentTerms: faker.helpers.arrayElement(invoicePaymentTermsEnum.enumValues),
 				status: faker.helpers.arrayElement(invoiceStatusEnum.enumValues),
 				items: Array.from(
