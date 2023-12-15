@@ -23,7 +23,29 @@ export default async function InvoiceDetailPage({ params }: { params: { id: stri
 					</CardContent>
 				</Card>
 			</section>
-			<section>{getShortenedInvoiceId(invoice.id)}</section>
+			<section>
+				<Card className="border-none shadow-none">
+					<CardContent className="space-y-8 py-6">
+						<section>
+							<h3>#{getShortenedInvoiceId(invoice.id)}</h3>
+							{invoice.description && <div>{invoice.description}</div>}
+						</section>
+
+						<section>
+							<h3 className="sr-only">Address</h3>
+							<div>{invoice.updatedAt.toLocaleDateString()}</div>
+							<div>{invoice.addressFrom.street}</div>
+							<div>{invoice.addressFrom.city}</div>
+							<div>{invoice.addressFrom.postCode}</div>
+							<div>{invoice.addressFrom.country}</div>
+						</section>
+
+						<section className="flex justify-between">
+							<h3 className="sr-only">Payment info</h3>
+						</section>
+					</CardContent>
+				</Card>
+			</section>
 		</div>
 	)
 }
